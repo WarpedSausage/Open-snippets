@@ -1,0 +1,40 @@
+Docker Run Config Override (JSON)
+{
+  "environment": {
+    "NVIDIA_VISIBLE_DEVICES": "all",
+    "NVIDIA_DRIVER_CAPABILITIES": "compute,utility,graphics",
+    "KASM_VGLRUN": "0",
+    "KASM_EGL_DEVICE": "/dev/dri/renderD128",
+    "VGL_EGL_DEVICE": "/dev/dri/renderD128",
+    "__GLX_VENDOR_LIBRARY_NAME": "nvidia"
+  },
+  "device_requests": [
+    {
+      "Driver": "nvidia",
+      "Count": -1,
+      "Capabilities": [
+        [
+          "gpu",
+          "utility",
+          "compute",
+          "video",
+          "graphics"
+        ]
+      ]
+    }
+  ],
+  "devices": [
+    "/dev/dri/card1:/dev/dri/card1:rwm",
+    "/dev/dri/renderD128:/dev/dri/renderD128:rwm"
+  ]
+}
+
+
+Docker Exec Config (JSON)
+
+{
+  "first_launch": {
+    "user": "root",
+    "cmd": "usermod -aG render,video kasm-user"
+  }
+}
